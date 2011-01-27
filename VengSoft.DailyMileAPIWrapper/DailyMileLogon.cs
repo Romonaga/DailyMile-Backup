@@ -42,7 +42,7 @@ namespace VengSoft.DailyMileAPIWrapper
                 {
                     if (holder.Key == "access_token")
                     {
-                        _connectionInfo.ServerKey = holder.Key;
+                        _connectionInfo.ServerKey = holder.Value;
                         _connectionInfo.IsLoggedIn = true;
                         DailyMileConnectionInfo.SaveConnectionInfo(_connectionInfo.ConfigFileLocation, _connectionInfo);
                         DialogResult = DialogResult.OK;
