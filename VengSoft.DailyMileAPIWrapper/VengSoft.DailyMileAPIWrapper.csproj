@@ -55,10 +55,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\CoreLibs\VengSoft.Collections.dll</HintPath>
     </Reference>
-    <Reference Include="VengSoft.Utilities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\CoreLibs\VengSoft.Utilities.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DailyMileAPI.cs" />
@@ -101,6 +97,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="QueryResponseHolder.cs" />
+    <Compile Include="Serializers.cs" />
+    <Compile Include="SerializersJSON.cs" />
+    <Compile Include="VSException.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DailyMileLogon.resx">

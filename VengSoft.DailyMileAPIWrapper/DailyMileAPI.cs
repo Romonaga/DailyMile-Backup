@@ -8,8 +8,7 @@ using System.IO;
 using System.Net;
 using VengSoft.Collections;
 
-using VengSoft.Utilities.Serialize;
-using VengSoft.Utilities.Exceptions;
+
 
 namespace VengSoft.DailyMileAPIWrapper
 {

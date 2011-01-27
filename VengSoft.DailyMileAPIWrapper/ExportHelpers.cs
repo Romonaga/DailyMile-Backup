@@ -5,7 +5,7 @@ using System.Text;
 
 using System.IO;
 
-using VengSoft.Utilities.Serialize;
+
 
 namespace VengSoft.DailyMileAPIWrapper
 {
@@ -34,7 +34,7 @@ namespace VengSoft.DailyMileAPIWrapper
             }
             catch (System.Exception ex)
             {
-                throw new VengSoft.Utilities.Exceptions.VSException(string.Format("ExportToXML EntryFileName({0}) ExportFileName({1}) User({2})", entriesFileName, exportFileName, user));
+                throw new VSException(string.Format("ExportToXML EntryFileName({0}) ExportFileName({1}) User({2})", entriesFileName, exportFileName, user));
             }
 
             return retVal;
