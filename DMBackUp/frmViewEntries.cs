@@ -192,10 +192,10 @@ namespace VengSoft.DMBackUp
             {
                 like = _api.PostLike(entry.ID);
                 entry.Likes.Add(like);
-                DailyMileAPI.MergeEntry(_entriesFileName, entry);
+                Helpers.MergeEntry(_entriesFileName, entry);
                 NewSelection();
             }
-            catch (VengSoft.Utilities.Exceptions.VSException vs)
+            catch (VengSoft.DailyMileAPIWrapper.VSException vs)
             {
                 MessageBox.Show("Exception: " + vs.Message);
             }

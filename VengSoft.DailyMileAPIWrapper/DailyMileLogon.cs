@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using VengSoft.Collections;
+
 
 namespace VengSoft.DailyMileAPIWrapper
 {
@@ -34,15 +34,24 @@ namespace VengSoft.DailyMileAPIWrapper
             
         }
 
-        private void ProcessQryResults(BindingListView<QueryResponseHolder> qryResponses)
+        private void ProcessQryResults(List<QueryResponseHolder> qryResponses)
         {
-            if (qryResponses.Exists("Key", "access_token") && _connectionInfo.IsLoggedIn == false)
+            if (_connectionInfo.IsLoggedIn == false)
             {
-                _connectionInfo.ServerKey = qryResponses.GetFirstItem("Key", "access_token").Value;
-                _connectionInfo.IsLoggedIn = true;
-                DailyMileConnectionInfo.SaveConnectionInfo(_connectionInfo.ConfigFileLocation, _connectionInfo);
-                DialogResult = DialogResult.OK;
-                this.Close();
+                foreach (QueryResponseHolder holder in qryResponses)
+                {
+                    if (holder.Key == "access_token")
+                    {
+                        _connectionInfo.ServerKey = holder.Key;
+                        _connectionInfo.IsLoggedIn = true;
+                        DailyMileConnectionInfo.SaveConnectionInfo(_connectionInfo.ConfigFileLocation, _connectionInfo);
+                        DialogResult = DialogResult.OK;
+                        this.Close();
+                        return;
+                    }
+                }
+
+               
             }
 
         }
@@ -50,13 +59,13 @@ namespace VengSoft.DailyMileAPIWrapper
 
         private void wbControl_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            BindingListView<QueryResponseHolder> qryResponses;
+            List<QueryResponseHolder> qryResponses;
 
             WebBrowser wb = (WebBrowser)sender;
             if (_connectionInfo.RedirectURL.Contains(wb.Url.Host) == true)
             {
                 wbControl.Visible = false;
-                qryResponses = new BindingListView<QueryResponseHolder>();
+                qryResponses = new List<QueryResponseHolder>();
                 if (string.IsNullOrEmpty(wb.Url.Fragment) == false)
                 {
                     string[] qryString = wb.Url.Fragment.Split(new char[] { '#' }, StringSplitOptions.RemoveEmptyEntries);

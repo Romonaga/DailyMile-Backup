@@ -13,7 +13,7 @@ using VengSoft.Utilities;
 using VengSoft.Utilities.Serialize;
 using VengSoft.Logging;
 using VengSoft.DailyMileAPIWrapper;
-using VengSoft.Utilities.Exceptions;
+
 
 namespace VengSoft.DMBackUp
 {
@@ -254,7 +254,7 @@ namespace VengSoft.DMBackUp
 
                  _logger.EnQueueAppTraceMessage("GetEntries() " + tsStatus.Text);
 
-                 DailyMileAPI.MergeEntries(_dmEntriesInfoFilename, entries);
+                 Helpers.MergeEntries(_dmEntriesInfoFilename, entries);
                  _logger.EnQueueAppTraceMessage("GetEntries() Merge finished");
                  tsStatus.Text = "GetEntries Merge Completed";
              }
@@ -288,7 +288,7 @@ namespace VengSoft.DMBackUp
                         using (BinaryReader binReader = new BinaryReader(fs))
                         {
 
-                            _aboutMe = SerializersJSON.Deserialise<DailyMileMe>(binReader.ReadBytes((int)fs.Length));
+                            _aboutMe = VengSoft.DailyMileAPIWrapper.SerializersJSON.Deserialise<DailyMileMe>(binReader.ReadBytes((int)fs.Length));
                             pbUserImage.ImageLocation = _aboutMe.Photo_url;
                         }
                     }
@@ -323,7 +323,7 @@ namespace VengSoft.DMBackUp
 
                     using (BinaryReader binReader = new BinaryReader(fs))
                     {
-                        friends = SerializersJSON.Deserialise<DailyMileFriends>(binReader.ReadBytes((int)fs.Length));
+                        friends = VengSoft.DailyMileAPIWrapper.SerializersJSON.Deserialise<DailyMileFriends>(binReader.ReadBytes((int)fs.Length));
 
                     }
                 }
@@ -352,7 +352,7 @@ namespace VengSoft.DMBackUp
                     using (BinaryWriter binWriter = new BinaryWriter(fs))
                     {
 
-                        binWriter.Write(SerializersJSON.Serialize<DailyMileFriends>(dmFriends));
+                        binWriter.Write(VengSoft.DailyMileAPIWrapper.SerializersJSON.Serialize<DailyMileFriends>(dmFriends));
                     }
                 }
             }
@@ -379,7 +379,7 @@ namespace VengSoft.DMBackUp
                     using (BinaryWriter binWriter = new BinaryWriter(fs))
                     {
 
-                        binWriter.Write(SerializersJSON.Serialize<DailyMileMe>(_aboutMe));
+                        binWriter.Write(VengSoft.DailyMileAPIWrapper.SerializersJSON.Serialize<DailyMileMe>(_aboutMe));
                     }
                 }
             }
@@ -412,7 +412,7 @@ namespace VengSoft.DMBackUp
 
                 SetLoggedOnControlValues(isLoggedOn);
             }
-            catch (VSException vs)
+            catch (VengSoft.DailyMileAPIWrapper.VSException vs)
             {
                 string exceptionText = string.Format("GetAPIToken() Exception ({0})", vs.Message);
                 tsStatus.Text = exceptionText;
@@ -520,7 +520,7 @@ namespace VengSoft.DMBackUp
                 _logger.EnQueueAppTraceMessage(tsStatus.Text);
             }
 
-            DailyMileAPI.MergeEntries(fileName, entries);
+            Helpers.MergeEntries(fileName, entries);
             _logger.EnQueueAppTraceMessage("CollectDateRangeEntries Leave");
         }
 
@@ -543,7 +543,7 @@ namespace VengSoft.DMBackUp
                        
                 tsStatus.Text = "Merging Friends Stream With Saved.";
                 _logger.EnQueueAppTraceMessage("GetFriendsStream() " + tsStatus.Text);
-                DailyMileAPI.MergeEntries(_dmFriendEntriesInfoFilename, entries);
+                Helpers.MergeEntries(_dmFriendEntriesInfoFilename, entries);
                 tsStatus.Text = "Done Merging Friends Stream.";
                 _logger.EnQueueAppTraceMessage("GetFriendsStream() " + tsStatus.Text);
 
@@ -590,7 +590,7 @@ namespace VengSoft.DMBackUp
                     MessageBox.Show("You are Not Logged In To DailyMile", "DMBackUp - Error");
                 }
             }
-            catch (VSException vs)
+            catch (VengSoft.DailyMileAPIWrapper.VSException vs)
             {
                 string exceptionText = string.Format("btnViewFriendsStream_Click() Exception ({0})", vs.Message);
                 tsStatus.Text = exceptionText;
@@ -604,7 +604,7 @@ namespace VengSoft.DMBackUp
             {
                 ViewFriendsStream();
             }
-            catch (VSException vs)
+            catch (VengSoft.DailyMileAPIWrapper.VSException vs)
             {
                 string exceptionText = string.Format("btnViewFriendStream_Click() Exception ({0})", vs.Message);
                 tsStatus.Text = exceptionText;
@@ -648,7 +648,7 @@ namespace VengSoft.DMBackUp
                     _dmConnectionInfo.LastBackupDateFriends = buRange.UntilDateTime.AddDays(-3);
                     DailyMileConnectionInfo.SaveConnectionInfo(_ConfigFileName, _dmConnectionInfo);
                 }
-                catch (VSException vs)
+                catch (VengSoft.DailyMileAPIWrapper.VSException vs)
                 {
                     string exceptionText = string.Format("btnBackUpFriends_Click() Exception ({0})", vs.Message);
                     tsStatus.Text = exceptionText;
