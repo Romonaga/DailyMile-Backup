@@ -14,10 +14,10 @@ namespace VengSoft.DailyMileAPIWrapper
     {
 
 
-        string _dailyMileURL;// = "https://api.dailymile.com";
-        string _redirectURL;// = "http://www.transactfutures.com";
-        string _clientID;// = "ShJwz7zGcAg0Y9DNyef8XOqN7XJOOV5VEeu5VyXq";
-        string _clientSecret;// = "r9JWM6T0uUocDaVjuaQVKHmT8TkEONzTrNlA7q7c";
+        string _dailyMileURL;
+        string _redirectURL;
+        string _clientID;
+        string _clientSecret;
         DateTime _LastBackupDateUser;
 
         public DateTime LastBackupDateUser
