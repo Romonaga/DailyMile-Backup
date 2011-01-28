@@ -32,17 +32,17 @@ namespace VengSoft.DMBackUp
             if (friendEntries.Count > 0)
             {
                 display_nameComboBox.SelectedIndex = 0;
-                UpdateControles();
+                UpdateControls();
             }
         }
 
         private void display_nameComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            UpdateControles();
+            UpdateControls();
          
         }
 
-        private void UpdateControles()
+        private void UpdateControls()
         {
             DailyMileFriend friend = display_nameComboBox.SelectedItem as DailyMileFriend;
             dailyMileFriendBindingSource.DataSource = friend;

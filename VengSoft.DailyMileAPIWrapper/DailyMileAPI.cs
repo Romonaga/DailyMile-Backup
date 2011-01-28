@@ -425,14 +425,16 @@ namespace VengSoft.DailyMileAPIWrapper
 
             try
             {
-
-                using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None))
+                if (File.Exists(fileName) == true)
                 {
-                    if (fs.Length > 0)
+                    using (FileStream fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Read, FileShare.None))
                     {
-                        using (BinaryReader binReader = new BinaryReader(fs))
+                        if (fs.Length > 0)
                         {
-                            storedEntries = SerializersJSON.Deserialise<DailyMileEntries>(binReader.ReadBytes((int)fs.Length));
+                            using (BinaryReader binReader = new BinaryReader(fs))
+                            {
+                                storedEntries = SerializersJSON.Deserialise<DailyMileEntries>(binReader.ReadBytes((int)fs.Length));
+                            }
                         }
                     }
                 }
