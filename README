@@ -1,2 +1,24 @@
-DailyMile API And Backup Program.
+Daily-mile C sharp API.
+
+This project was started because I wanted the ability of backing up my data that I store on DailyMile.
+
+The DailyMile team was thoughtful enough to create an API that allows a developer to mine the data.
+
+I also was interested in seeing how JSON objects worked and how I could use the Native Csharp parsers to Deserialize the JSON objects.  This lead to some great learning experience.
+
+While the API is not complete, some of the functions to POST data to Daily Mile are not done.  But the major ones are.  Most of the GET calls are done and the calls handle the serialization for you.
+
+The code is raw and undocumented at this point, but a sample application that uses the API should guide you.  DailyMileBackup is the sample application and it is the primary reason for this API..
+
+You will note that the Sample application uses core libs that I do not intend on releasing the code to.  However, you will find that the API has no dependency on these corelibs.  Where I needed I provide  a copy of the core lib classes you would need.  Example: Jason serialization.
+
+As you see the project is in 3 parts.
+
+CoreLibs
+The binary libs you need to build the BackUpProgram that demos the use of the DailyMile API.
+
+
+DailyMileAPI 
+
+DailyMileBackUP
 
