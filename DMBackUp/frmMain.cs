@@ -83,9 +83,11 @@ namespace VengSoft.DMBackUp
                 _logger.EnQueueAppTraceMessage("SetupDMConnectionInfo() Creating New");
                 _dmConnectionInfo = new DailyMileConnectionInfo();
                 _dmConnectionInfo.DailyMileURL = "https://api.dailymile.com";
-                _dmConnectionInfo.RedirectURL = "http://www.transactfutures.com";
-                _dmConnectionInfo.ClientID = "ShJwz7zGcAg0Y9DNyef8XOqN7XJOOV5VEeu5VyXq";
-                _dmConnectionInfo.ClientSecret = "r9JWM6T0uUocDaVjuaQVKHmT8TkEONzTrNlA7q7c";
+
+                //Add your API Info here
+                _dmConnectionInfo.RedirectURL = "";
+                _dmConnectionInfo.ClientID = "";
+                _dmConnectionInfo.ClientSecret = "";
                 _dmConnectionInfo.IsLoggedIn = false;
                 SetLoggedOnControlValues(false);
             }
